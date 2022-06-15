@@ -1,0 +1,180 @@
+{% load static %}
+{% load post_tag %}
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/main.css' %}">
+    <link rel="shortcut icon" href="{% static 'blog/images/logo.ico' %}">
+    {% if title  %}
+    <title>أنيس حركات | {{title}}</title>
+    {% else %}
+    <title>أنيس حركات</title>
+    {% endif %}
+
+
+</head>
+<body>
+
+    <header>
+       
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">
+                <a href="{% url 'home' %}"><img  src="{% static 'blog/images/logo.png' %}" alt="شعار مدونة" width="30px"></a><a href="{% url 'home' %}"> أنيس حركات </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">الرئيسية</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      دوراتي
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="#">دورة بايثون</a></li>
+                      <li><a class="dropdown-item" href="#"> دورة دجانغو</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">دورة اللينيكس</a></li>
+                    </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">من أنا</a>
+                      </li>
+                  </li>
+                </ul>
+
+                {% if user.is_authenticated %}
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item"><a class="nav-link" style="color: white;" href="{% url 'new_post' %}">تدوينة جديدة</a></li>
+                  <li class="nav-item"><a class="nav-link" style="color: white;" href="{% url 'profile' %}">الملف الشخصي</a></li>
+                  <li class="nav-item"><a class="nav-link " style="color: white;" href="{% url 'logout' %}">تسجيل خروج</a></li>
+              </ul>
+                {% else %}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item"><a class="nav-link " style="color: white;" href="{% url 'login' %}">تسجيل دخول</a></li>
+                  <li class="nav-item"><a class="nav-link" style="color: white;" href="{% url 'register' %}"> مستخدم جديد</a></li>
+              </ul>
+                {% endif %}
+                
+              </div>
+            </div>
+          </nav>
+
+
+    </header>
+
+
+
+    <section>
+      <div class="container">
+        <div class="row mt-4">
+          <div class="col-md-8">
+              {% block content %}
+
+              {% endblock content %}
+          </div>
+          <div class="col-md-4">
+            <div class="card mb-3">
+              <h3 class="text- bg-secondary text-light p-2"> - آخر التدوينات</h3>
+              {% lastest_posts %}
+            </div>
+            <div class="card mb-3">
+              <h3 class="text- bg-secondary text-light p-2"> - آخر التعليقات</h3>
+              {% lastest_comments %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <footer class="bg-secondary">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md">
+            <div class="card-group mt-3">
+              <div class="card m-3">
+                <div class="card-title border-buttom p-2 m-3"> مـــن أنـــا ؟
+                  <hr>
+                  <div class="card-body">
+                    <div class="text-center">
+                      <img src="{% static 'blog/images/logo.png' %}" width="100px" alt="شعار مدونة">
+                    </div>
+                    
+                    <P>من انا نص تجريبي من انا نص تجريبي من انا نص تجريبي من انا نص تجريبي من انا نص تجريبي من انا نص تجريبي من انا نص تجريبي من انا نص تجريبي من انا نص تجريبي </P>
+                  </div>
+                </div>
+              </div>
+              <div class="card m-3">
+                <div class="card-title  border-buttom p-2 m-3">  مواقع هــامة :
+                  <hr>
+                  <div class="card-body">
+                    <ul>
+                      <li><a href="">الموقع الأول</a></li>
+                      <li><a href="">الموقع الثاني</a></li>
+                      <li><a href="">الموقع الثالث</a></li>
+                      <li><a href="">الموقع الرابع</a></li>
+                      <li><a href="">الموقع الخامس</a></li>
+  
+  
+                    </ul>
+
+                  </div>
+
+                </div>
+              </div>
+              <div class="card m-3">
+                
+                <div class="card-title  border-buttom p-2 m-3"> وسائل التواصل الإجتماعي :
+              
+                
+                <hr>
+                
+                <h4 class="card-body text-center">
+                  <a class="text-secondary" href=""><i class="fab fa-facebook"></i></a>
+                  <a class="text-secondary" href=""><i class="fab fa-instagram"></i></a>
+                  <a class="text-secondary" href=""><i class="fab fa-twitter"></i></a>
+                  <a class="text-secondary" href=""><i class="fab fa-youtube"></i></a>
+                  <a class="text-secondary" href=""><i class="fab fa-reddit"></i></a>
+                  <a class="text-secondary" href=""><i class="fab fa-telegram"></i></a>
+                  
+                  
+                
+                  
+                  
+                  
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row p-2">
+          <div class="col-md text-center mb-2">
+            <small class="text-light">&copy; جميع الحقوق محفوضة</small>
+          </div>
+          
+        </div>
+      </div>
+
+    </footer>
+
+
+    <script src="{% static 'blog/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'blog/js/popper.min.js' %}"></script>
+    <script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'blog/js/fontawesome-all.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+
+
+
+    
+</body>
+</html>

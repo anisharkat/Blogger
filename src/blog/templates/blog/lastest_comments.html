@@ -1,0 +1,24 @@
+<ul class="list-group-flush">
+    {% for comment in l_comments %}
+
+    <a href="{% url 'post_detail' comment.post.id %}">
+        <li class="list-group-item">
+            {% if comment.body|length > 40%}
+            {{comment.body|slice:'50'}} ..
+        {% else %}
+        {{comment.body}}
+        {% endif %}
+        </li>
+    </a>
+
+
+    {% empty %}
+
+    <li class="list-group-item">لا يوجد تعليقات </li>
+
+    {% endfor %}
+
+    
+
+
+</ul>
